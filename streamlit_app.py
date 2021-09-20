@@ -29,4 +29,5 @@ question = st.text_input(label='Enter a question.')
 text = st.text_area(label="Enter the context for the question")
 if (not len(text)==0) and not (len(question)==0):
     x_dict = qa_pipe(context=text,question=question)
-    st.text(f"Answer: ,{x_dict['answer']}")
+    st.text(x_dict['answer'])
+    
