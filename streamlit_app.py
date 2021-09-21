@@ -7,9 +7,9 @@
 
 
 #https://towardsdatascience.com/nlp-data-apps-batteries-included-with-streamlit-and-huggingface-828083a89bb2
+# https://www.youtube.com/watch?v=jJTa625q85o
 
-
-model_checkpoint = 'run3-checkpoint-40790'
+model_checkpoint = 'model_r18_checkpoint-e5'
 
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForQuestionAnswering
@@ -22,12 +22,11 @@ def load_pipe():
     return qa_pipe
 qa_pipe = load_pipe()
 st.header("QA Model Demo")
-st.text("This demo uses DistelBert Model Trained on Squad V2")
+st.text("This demo uses ELECTRA small trained on SQuAD 2.0")
 #add_text_sidebar = st.sidebar.title("Menu")
 #add_text_sidebar = st.sidebar.text("Just some random text.")
 question = st.text_input(label='Enter a question.')
 text = st.text_area(label="Enter the context for the question")
 if (not len(text)==0) and not (len(question)==0):
     x_dict = qa_pipe(context=text,question=question)
-    st.text(x_dict['answer'])
-    
+    st.text(f"Answer: {x_dict['answer']}")
